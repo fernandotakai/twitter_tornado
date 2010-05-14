@@ -1,0 +1,7 @@
+<div id="{{ post['id'] }}" {% if post['in_reply_to_screen_name'] == current_user['screen_name']  %}style="border-color: green;"{% end %} class="post">
+    <p><b><a href="http://twitter.com/escape(post['user']['screen_name'])">{{ escape(post['user']['screen_name']) }}</a></b>  {{ post['text'] }} <br /> 
+    {% if post['in_reply_to_status_id'] %}
+    in reply to <a href="http://twitter.com/{{post['in_reply_to_screen_name']}}/status/{{post['in_reply_to_status_id']}}">{{ post['in_reply_to_screen_name'] }}</a>
+    {% end %}
+    <abbr class="timeago" title="{{ post['created_at'] }}">{{ post['created_at'] }}</abbr> via {{ post['source'] }}</p> 
+</div> 

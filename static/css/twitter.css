@@ -1,0 +1,39 @@
+#stream {
+    width:960px;
+    margin:30 auto;
+    overflow:hidden;
+}
+
+.post {
+    clear: both;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 0px;
+    border-style: solid;
+    border-color: grey;
+    border-width: medium;
+    margin: 10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+}
+
+.header {
+    clear: both;
+    width:930px;
+    margin:30 auto;
+}
+
+#buttons {
+    text-transform:uppercase;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.status {
+    float: right;
+    display: none;
+}
+
+.new {
+    border-color: black;
+}

@@ -1,0 +1,18 @@
+{% extends base.html %}
+
+{% block content %}
+
+<div class="header">
+    <div class='status'>
+        <p></p>
+    </div>
+    <div class="buttons">
+        <p>Hi! {{ escape(current_user["name"]) }} - <a href="javascript:void(0)" id="stop">stop refresh</a><a href="javascript:void(0)" id="start" style="display: none;">start refresh</a> - <a href="/logout">logout</a> </p> 
+    </div>     
+</div> 
+<div id="stream">
+{% for post in posts %}
+        {% include post.html %}
+    {% end %}
+</div>
+{% end %}
