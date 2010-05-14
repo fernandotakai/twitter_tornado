@@ -37,3 +37,22 @@
 .new {
     border-color: black;
 }
+
+#post {
+    width:500px;
+    margin:30 auto;
+    overflow:hidden;    
+}
+
+textarea {
+    width:500px;
+    height: 60px;
+}
+
+.chars_left {
+    float: right;
+}
+
+.chars {
+    font-weight: bold;
+}

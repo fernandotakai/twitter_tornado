@@ -79,6 +79,25 @@ class TwitterAuthHandler(BaseHandler,
             self.set_secure_cookie("user", tornado.escape.json_encode(user))
             self.redirect("/")
 
+class TwitterUpdaterHandler(BaseHandler, 
+                    tornado.auth.TwitterMixin):
+
+    @tornado.web.asynchronous
+    @tornado.web.authenticated
+    def post(self):
+        status = self.get_argument('status')
+
+        self.twitter_request("/statuses/update",
+                            post_args={"status": status.encode("utf-8")},
+                            access_token=self.get_current_user()['access_token'],
+                            callback=self.async_callback(self._on_post))
+
+    def _on_post(self, status):
+        if not status:
+            raise tornado.web.HTTPError(500)
+        else:
+            self.finish(tornado.web.escape.json_encode(status));
+
 class LogoutHandler(BaseHandler):
     def get(self):
         self.clear_cookie('user')
@@ -99,6 +118,7 @@ settings = {
 application = tornado.web.Application([
     (r"/login", TwitterAuthHandler),
     (r"/logout", LogoutHandler),
+    (r"/post", TwitterUpdaterHandler),
     (r"/", TwitterStreamHandler)
 ], **settings) 
 
