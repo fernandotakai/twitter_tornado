@@ -59,6 +59,8 @@ var updater = {
             html.slideDown(300);
         }
 
+        $("abbr.timeago").timeago()
+
         if(posts.length != 0){
             document.title = $('.new').length + " - Twitter Example"
         }
