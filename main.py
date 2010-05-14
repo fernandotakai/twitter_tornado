@@ -31,7 +31,7 @@ class TwitterStreamHandler(BaseHandler,
             self.twitter_request("/statuses/home_timeline",
                                  access_token=self.get_current_user()['access_token'],
                                  callback=self.async_callback(self._on_finish_post),
-                                 since_id=since) 
+                                 since_id=since, count=200) 
 
         def _on_finish_get(self, posts):
             if not posts:
