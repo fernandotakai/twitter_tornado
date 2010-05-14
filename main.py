@@ -35,7 +35,7 @@ class TwitterStreamHandler(BaseHandler,
 
         def _on_finish_get(self, posts):
             if not posts:
-                posts = []
+                raise tornado.web.HTTPError(500);
 
             for post in posts:
                 post['text'] = self._proccess_tweet(post['text'])
@@ -44,7 +44,7 @@ class TwitterStreamHandler(BaseHandler,
 
         def _on_finish_post(self, posts):
             if not posts:
-                posts = []
+                raise tornado.web.HTTPError(500);
 
             for post in posts:
                 post['text'] = self._proccess_tweet(post['text'])
