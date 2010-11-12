@@ -2,11 +2,13 @@ import tornado.httpserver
 import tornado.web
 import tornado.auth
 
+from tornado.options import define, options
+
 from bleach import Bleach
 
 import os
-
 import re
+import logging
 
 class BaseHandler(tornado.web.RequestHandler):
     def get_current_user(self):
@@ -28,6 +30,7 @@ class TwitterStreamHandler(BaseHandler,
         @tornado.web.asynchronous  
         def post(self):
             since = self.get_argument('since')
+            logging.info(since)
             self.twitter_request("/statuses/home_timeline",
                                  access_token=self.get_current_user()['access_token'],
                                  callback=self.async_callback(self._on_finish_post),
@@ -107,8 +110,8 @@ settings = {
     "template_path": os.path.join(os.path.dirname(__file__), "templates"),
     "static_path": os.path.join(os.path.dirname(__file__), "static"),
     "cookie_secret": "11oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=",
-    "twitter_consumer_key": 'hZ2SGymCyji0dLoieJeFbg',
-    "twitter_consumer_secret": 'egGqGY7Ye9JzL8RyrxVt0OsqVvhuUD0tryaPN55TA8',
+    "twitter_consumer_key": 'Zm03T6WTg3xX6wGN4YNmnQ',
+    "twitter_consumer_secret": 'wa5juB4Av18uO9HyOzbL3RuG99gg1UZVPaoGa7Xlw',
     "login_url": "/login",
     "xsrf_cookies": False,
     "auto_reload": True,
@@ -123,8 +126,9 @@ application = tornado.web.Application([
 ], **settings) 
 
 def main():
+    tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(application)
-    http_server.listen(8000)
+    http_server.listen(8888)
     tornado.ioloop.IOLoop.instance().start() 
  
 if __name__ == '__main__':
